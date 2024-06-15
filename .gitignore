@@ -4,5 +4,7 @@
 .DS_Store
 /jest-stare
 /coverage
+.scannerwork
+/src/scannerwork
 
 # .env  

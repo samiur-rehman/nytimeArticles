@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 
 function ArticleDetail({ selectedArticle }) {
   return (
-    <div className="w-full md:w-2/3 bg-white p-4 rounded shadow flex-shrink-0 overflow-y-auto h-full">
+    <div className="w-full bg-white p-4 rounded shadow flex-shrink-0 overflow-y-auto h-full">
       <h2 className="text-2xl font-bold mb-4">{selectedArticle.title}</h2>
       {selectedArticle.imageUrl && (
         <div className="mb-4 max-w-[450px]">
@@ -13,16 +13,16 @@ function ArticleDetail({ selectedArticle }) {
             className="mb-2 rounded"
           />
           {selectedArticle.imageCaption && (
-          <p className="text-sm text-gray-600 px-2">
-            {selectedArticle.imageCaption}
-          </p>
+            <p className="text-sm text-gray-600 px-2">
+              {selectedArticle.imageCaption}
+            </p>
           )}
           {selectedArticle.imageCopyright && (
-          <p className="text-xs text-gray-500 px-2">
-            ©
-            {' '}
-            {selectedArticle.imageCopyright}
-          </p>
+            <p className="text-xs text-gray-500 px-2">
+              ©
+              {' '}
+              {selectedArticle.imageCopyright}
+            </p>
           )}
         </div>
       )}

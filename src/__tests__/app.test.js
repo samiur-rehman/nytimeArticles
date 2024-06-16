@@ -43,6 +43,9 @@ describe('App Component', () => {
   });
 
   test('selects an article and displays ArticleDetail', async () => {
+    axios.get.mockResolvedValue({ data: { results: mockArticlesList } });
+    window.HTMLElement.prototype.scrollIntoView = jest.fn();
+
     render(<App />);
 
     await waitFor(() => expect(axios.get).toHaveBeenCalledTimes(1));

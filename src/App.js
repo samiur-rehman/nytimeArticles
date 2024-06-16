@@ -1,5 +1,5 @@
 /* eslint-disable jsx-a11y/click-events-have-key-events, jsx-a11y/no-noninteractive-element-interactions */
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import axios from 'axios';
 import ArticleDetail from './ArticleDetail';
 import { API_URL, timeFrame } from './utils/constants';
@@ -8,6 +8,7 @@ function App() {
   const [articles, setArticles] = useState([]);
   const [selectedArticle, setSelectedArticle] = useState(null);
   const [selectedTimeframe, setSelectedTimeframe] = useState('1');
+  const detailRef = useRef(null);
 
   const fetchArticles = async (noDays) => {
     const cookUrl = `${API_URL}${noDays}.json?api-key=${process.env.API_KEY}`;
@@ -19,12 +20,15 @@ function App() {
         const imageCaption = media?.[0]?.caption;
         const imageCopyright = media?.[0]?.copyright;
         return {
-          ...article, imageUrl, imageCaption, imageCopyright,
+          ...article,
+          imageUrl,
+          imageCaption,
+          imageCopyright,
         };
       });
       setArticles(articlesData);
     } catch (error) {
-      console.error(error);
+      // console.error(error);
     }
   };
 
@@ -32,10 +36,16 @@ function App() {
     fetchArticles(selectedTimeframe);
   }, [selectedTimeframe]);
 
+  useEffect(() => {
+    if (selectedArticle && detailRef.current) {
+      detailRef.current.scrollIntoView({ behavior: 'smooth' });
+    }
+  }, [selectedArticle]);
+
   return (
-    <div className="container mx-auto px-4 py-8 h-screen flex flex-col">
+    <div className="container mx-auto px-4 py-8 min-h-screen md:h-screen flex flex-col">
       <div className="flex justify-between items-center mb-4">
-        <h1 className="text-3xl font-bold">Most Popular Articles</h1>
+        <h1 className="text-2xl md:text-3xl lg:text-4xl font-bold">Most Popular Articles</h1>
         <div className="flex space-x-4">
           {timeFrame.map((button) => (
             <button
@@ -67,18 +77,19 @@ function App() {
                 }`}
                 onClick={() => setSelectedArticle(article)}
               >
-                <p
-                  className="text-xl"
-                >
-                  {article.title}
-                </p>
+                <p className="text-xl">{article.title}</p>
               </li>
             ))}
           </ul>
         </div>
-        {selectedArticle && (
-          <ArticleDetail selectedArticle={selectedArticle} />
-        )}
+        <div
+          ref={detailRef}
+          className={`w-full md:w-2/3 ${selectedArticle ? 'block' : 'hidden md:block'}`}
+        >
+          {selectedArticle && (
+            <ArticleDetail selectedArticle={selectedArticle} />
+          )}
+        </div>
       </div>
     </div>
   );

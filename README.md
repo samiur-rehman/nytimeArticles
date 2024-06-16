@@ -16,8 +16,8 @@ Ensure you have Node.js (v15.14.0 or higher) installed on your machine.
 Clone the repository and install dependencies using npm:
 
 ```bash
-https://github.com/samiur-rehman/nytimeArticles.git
-cd nytime-articles-assignment
+git clone https://github.com/samiur-rehman/nytimeArticles.git
+cd nytimeArticles
 npm install
 ```
 

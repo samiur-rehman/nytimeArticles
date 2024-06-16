@@ -10,6 +10,8 @@ Check out the live demo on Vercel: [NY Times Most Popular Articles](https://nyti
 
 Ensure you have Node.js (v15.14.0 or higher) installed on your machine.
 
+#### Note:
+Usually, we don't push the .env file to GitHub.  Instead, I ensure that when you clone the project from GitHub, it's straightforward to set up and run smoothly on your local machine.
 
 ## Installation
 
